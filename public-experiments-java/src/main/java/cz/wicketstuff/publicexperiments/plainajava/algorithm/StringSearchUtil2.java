@@ -28,7 +28,7 @@ public class StringSearchUtil2 {
 				return e.getKey().toString();
 			}
 		}
-		throw new IllegalStateException("Input String doesn't contain any non-repeating character.");
+		throw new IllegalStateException("Input String doesn't contain any non-repeating character. Input: " + str);
 	}
 	
 }
