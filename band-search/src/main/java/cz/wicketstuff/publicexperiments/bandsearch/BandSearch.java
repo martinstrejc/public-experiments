@@ -1,6 +1,7 @@
 package cz.wicketstuff.publicexperiments.bandsearch;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -9,6 +10,8 @@ import java.util.Set;
  */
 public interface BandSearch {
 	
-	Set<Set<Integer>> findBinds(Collection<Relation> relations);
+	List<Set<Integer>> findBands(Collection<Relation> relations);
+
+	List<Integer> findBandsSize(Collection<Relation> relations);
 
 }
