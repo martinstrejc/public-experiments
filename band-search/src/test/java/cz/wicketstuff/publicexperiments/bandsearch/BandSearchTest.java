@@ -10,9 +10,8 @@ import org.junit.Test;
 
 public class BandSearchTest {
 
-	private BandSearch search = null;
-	
-	
+	private BandSearch search = new BandSearchImpl();
+
 	public void findBands() {
 		List<Relation> relations = new LinkedList<>();
 		relations.add(new Relation(1, 2));
