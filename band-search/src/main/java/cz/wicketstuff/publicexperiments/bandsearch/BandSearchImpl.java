@@ -8,10 +8,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author Martin Strejc (strma17)
@@ -54,7 +54,7 @@ public class BandSearchImpl implements BandSearch {
 
 		}
 		
-		final List<Set<Integer>> ret = new LinkedList<>();
+		final List<Set<Integer>> ret = new ArrayList<>(bands.size());
 		bands.values().forEach(ret::add);
 		return ret;
 	}
@@ -71,7 +71,7 @@ public class BandSearchImpl implements BandSearch {
 		for (Relation rel : relations) {
 			norm.add(rel.person1 < rel.person2 ? rel : rel.reverse());
 		}
-		return norm;
+		return norm.stream().sorted().collect(Collectors.toList());
 	}
 	
 }

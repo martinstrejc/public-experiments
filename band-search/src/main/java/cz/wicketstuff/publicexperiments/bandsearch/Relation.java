@@ -50,8 +50,8 @@ public class Relation implements Serializable, Comparable<Relation> {
 
 	@Override
 	public int compareTo(Relation o) {
-		int c1 = o.person1 - o.person2; 
-		return c1 == 0 ? o.person1 - o.person2 : c1;
+		int c1 = person1 - o.person1; 
+		return c1 == 0 ? person2 - o.person2 : c1;
 	}
 
 	

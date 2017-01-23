@@ -34,9 +34,9 @@ public class BandSearchTest {
 	@Test
 	public void findBands_complexTest() {
 		List<Relation> relations = new LinkedList<>();
+		relations.add(new Relation(4, 3));
 		relations.add(new Relation(1, 2));
 		relations.add(new Relation(2, 3));
-		relations.add(new Relation(4, 3));
 		relations.add(new Relation(4, 1));
 		relations.add(new Relation(2, 1));
 		
