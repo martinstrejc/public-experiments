@@ -31,27 +31,19 @@ public class BandSearchImpl implements BandSearch {
 			.sorted()
 			.forEach(rel ->
 			{
-			
-				final int p1 = rel.person1;
-				final int p2 = rel.person2;
 	
-				Integer owner = members2owner.get(p1);
-				if (owner == null) {
-					owner = p1;
-					members2owner.put(p1, owner);
-				}
+				Integer owner = members2owner.getOrDefault(rel.person1, rel.person1);
 	
 				Set<Integer> band = bands.get(owner);
 				if (band == null) {
 					band = new LinkedHashSet<>();
-					band.add(p1);
 					bands.put(owner, band);
-				} else {
-					band.add(p1);
 				}
 				
-				band.add(p2);
-				members2owner.put(p2, owner);
+				band.add(rel.person1);
+				band.add(rel.person2);
+				members2owner.put(rel.person1, owner);
+				members2owner.put(rel.person2, owner);
 	
 			}
 		);
