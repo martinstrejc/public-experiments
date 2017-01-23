@@ -12,10 +12,22 @@ public class BandSearchTest {
 
 	private BandSearch search = new BandSearchImpl();
 
-	public void findBands() {
+	@Test
+	public void complexTest() {
 		List<Relation> relations = new LinkedList<>();
 		relations.add(new Relation(1, 2));
-		fail("Not yet implemented");
+		relations.add(new Relation(2, 3));
+		relations.add(new Relation(4, 3));
+		relations.add(new Relation(4, 1));
+		relations.add(new Relation(2, 1));
+		
+		relations.add(new Relation(1, 8));
+		relations.add(new Relation(7, 5));
+		relations.add(new Relation(5, 6));
+		relations.add(new Relation(8, 9));
+		relations.add(new Relation(10, 10));
+		
+		assertThat(search.findBandsSize(relations), CoreMatchers.hasItems(6, 3));
 	}
 	
 	@Test
