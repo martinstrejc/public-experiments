@@ -6,7 +6,7 @@ import java.io.Serializable;
  * @author Martin Strejc (strma17)
  *
  */
-public class Relation implements Serializable {
+public class Relation implements Serializable, Comparable<Relation> {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -17,6 +17,10 @@ public class Relation implements Serializable {
 		super();
 		this.person1 = person1;
 		this.person2 = person2;
+	}
+	
+	public Relation reverse() {
+		return new Relation(person2, person1);
 	}
 
 	@Override
@@ -43,5 +47,12 @@ public class Relation implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public int compareTo(Relation o) {
+		int c1 = o.person1 - o.person2; 
+		return c1 == 0 ? o.person1 - o.person2 : c1;
+	}
+
 	
 }

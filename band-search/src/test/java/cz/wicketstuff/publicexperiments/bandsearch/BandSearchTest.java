@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
@@ -13,7 +14,7 @@ public class BandSearchTest {
 	private BandSearch search = new BandSearchImpl();
 
 	@Test
-	public void complexTest() {
+	public void findBandsSize_complexTest() {
 		List<Relation> relations = new LinkedList<>();
 		relations.add(new Relation(1, 2));
 		relations.add(new Relation(2, 3));
@@ -29,7 +30,27 @@ public class BandSearchTest {
 		
 		assertThat(search.findBandsSize(relations), CoreMatchers.hasItems(6, 3));
 	}
-	
+
+	@Test
+	public void findBands_complexTest() {
+		List<Relation> relations = new LinkedList<>();
+		relations.add(new Relation(1, 2));
+		relations.add(new Relation(2, 3));
+		relations.add(new Relation(4, 3));
+		relations.add(new Relation(4, 1));
+		relations.add(new Relation(2, 1));
+		
+		relations.add(new Relation(1, 8));
+		relations.add(new Relation(7, 5));
+		relations.add(new Relation(5, 6));
+		relations.add(new Relation(8, 9));
+		relations.add(new Relation(10, 10));
+		
+		List<Set<Integer>> actual = search.findBands(relations);
+		assertThat(actual.get(0), CoreMatchers.hasItems(1, 2, 3, 4, 8, 9));
+		assertThat(actual.get(1), CoreMatchers.hasItems(5, 7));
+	}
+
 	@Test
 	public void findBandsSize_1a() {
 		List<Relation> relations = new LinkedList<>();
