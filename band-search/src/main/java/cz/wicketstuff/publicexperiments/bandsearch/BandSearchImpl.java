@@ -28,7 +28,6 @@ public class BandSearchImpl implements BandSearch {
 		Map<Integer, Set<Integer>> bands = new LinkedHashMap<>();  
 		
 		normalizedRelations
-			.filter(rel -> rel.person1 != rel.person2)
 			.forEach(rel ->
 		{
 		
@@ -71,7 +70,7 @@ public class BandSearchImpl implements BandSearch {
 		for (Relation rel : relations) {
 			norm.add(rel.person1 < rel.person2 ? rel : rel.reverse());
 		}
-		return norm.stream().sorted();
+		return norm.stream().filter(rel -> rel.person1 != rel.person2).sorted();
 	}
 	
 }
