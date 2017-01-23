@@ -2,6 +2,7 @@ package cz.wicketstuff.publicexperiments.bandsearch;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -46,7 +47,7 @@ public class BandSearchTest {
 		relations.add(new Relation(8, 9));
 		relations.add(new Relation(10, 10));
 		
-		List<Set<Integer>> actual = search.findBands(relations);
+		List<Set<Integer>> actual = new ArrayList<>(search.findBands(relations));
 		assertThat(actual.get(0), CoreMatchers.hasItems(1, 2, 3, 4, 8, 9));
 		assertThat(actual.get(1), CoreMatchers.hasItems(5, 6, 7));
 	}

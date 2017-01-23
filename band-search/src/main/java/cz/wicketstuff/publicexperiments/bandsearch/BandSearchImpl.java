@@ -6,7 +6,6 @@ package cz.wicketstuff.publicexperiments.bandsearch;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -18,7 +17,7 @@ import java.util.stream.Collectors;
 public class BandSearchImpl implements BandSearch {
 
 	@Override
-	public List<Set<Integer>> findBands(Collection<Relation> relations) {
+	public Collection<Set<Integer>> findBands(Collection<Relation> relations) {
 		
 		Map<Integer, Set<Integer>> members2band = new LinkedHashMap<>();  
 		
@@ -54,7 +53,7 @@ public class BandSearchImpl implements BandSearch {
 	}
 	
 	@Override
-	public List<Integer> findBandsSize(Collection<Relation> relations) {
+	public Collection<Integer> findBandsSize(Collection<Relation> relations) {
 		return findBands(relations).stream().map(Set::size).collect(Collectors.toList());
 	}
 
