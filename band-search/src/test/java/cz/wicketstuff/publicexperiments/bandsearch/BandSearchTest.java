@@ -48,7 +48,7 @@ public class BandSearchTest {
 		
 		List<Set<Integer>> actual = search.findBands(relations);
 		assertThat(actual.get(0), CoreMatchers.hasItems(1, 2, 3, 4, 8, 9));
-		assertThat(actual.get(1), CoreMatchers.hasItems(5, 7));
+		assertThat(actual.get(1), CoreMatchers.hasItems(5, 6, 7));
 	}
 
 	@Test
