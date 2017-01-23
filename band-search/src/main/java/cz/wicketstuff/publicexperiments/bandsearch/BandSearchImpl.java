@@ -26,50 +26,29 @@ public class BandSearchImpl implements BandSearch {
 		Map<Integer, Integer> members2owner = new HashMap<>();
 		Map<Integer, Set<Integer>> bands = new LinkedHashMap<>();  
 		
-		
 		for (Relation rel : normalizedRelations) {
 			final int p1 = rel.person1;
 			final int p2 = rel.person2;
 			if (p1 == p2) {
 				continue;
 			}
-			/*
-			saveData(p1, p1, members2owner, bands);
-			saveData(p1, p2, members2owner, bands);
-*/
+
 			Integer owner = members2owner.get(p1);
 			if (owner == null) {
 				owner = p1;
 				members2owner.put(p1, owner);
-				Set<Integer> band = bands.get(owner);
-				if (band == null) {
-					band = new LinkedHashSet<>();
-					band.add(p1);
-					bands.put(owner, band);
-				} else {
-					band.add(p1);
-				}
-			} else {
-				Set<Integer> band = bands.get(owner);
-				if (band == null) {
-					band = new LinkedHashSet<>();
-					band.add(p1);
-					bands.put(owner, band);
-				} else {
-					band.add(p1);
-				}				
 			}
 
+			Set<Integer> band = bands.get(owner);
+			if (band == null) {
+				band = new LinkedHashSet<>();
+				band.add(p1);
+				bands.put(owner, band);
+			} else {
+				band.add(p1);
+			}
 			
-			// owner = members2owner.get(p1);
-				Set<Integer> band = bands.get(owner);
-				if (band == null) {
-					band = new LinkedHashSet<>();
-					band.add(p2);
-					bands.put(owner, band);
-				} else {
-					band.add(p2);
-				}				
+			band.add(p2);
 			members2owner.put(p2, owner);
 
 
@@ -80,31 +59,6 @@ public class BandSearchImpl implements BandSearch {
 		return ret;
 	}
 	
-	private static void saveData(int ownerSearch, int person, Map<Integer, Integer> members2owner, Map<Integer, Set<Integer>> bands) {
-		Integer owner = members2owner.get(ownerSearch);
-		if (owner == null) {
-			owner = ownerSearch;
-			members2owner.put(person, owner);
-			Set<Integer> band = bands.get(owner);
-			if (band == null) {
-				band = new LinkedHashSet<>();
-				band.add(person);
-				bands.put(owner, band);
-			} else {
-				band.add(person);
-			}
-		} else {
-			Set<Integer> band = bands.get(owner);
-			if (band == null) {
-				band = new LinkedHashSet<>();
-				band.add(person);
-				bands.put(owner, band);
-			} else {
-				band.add(person);
-			}				
-		}
-	}
-
 	@Override
 	public List<Integer> findBandsSize(Collection<Relation> relations) {
 		List<Integer> ret = new ArrayList<>(relations.size());
