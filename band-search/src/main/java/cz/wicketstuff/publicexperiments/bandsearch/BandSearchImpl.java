@@ -4,7 +4,6 @@
 package cz.wicketstuff.publicexperiments.bandsearch;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -21,8 +20,7 @@ public class BandSearchImpl implements BandSearch {
 	@Override
 	public List<Set<Integer>> findBands(Collection<Relation> relations) {
 		
-		Map<Integer, Integer> members2owner = new HashMap<>();
-		Map<Integer, Set<Integer>> bands = new LinkedHashMap<>();  
+		Map<Integer, Set<Integer>> members2band = new LinkedHashMap<>();  
 		
 		relations
 			.stream()
@@ -32,23 +30,27 @@ public class BandSearchImpl implements BandSearch {
 			.forEach(rel ->
 			{
 	
-				Integer owner = members2owner.getOrDefault(rel.person1, rel.person1);
-	
-				Set<Integer> band = bands.get(owner);
+				Set<Integer> band = members2band.get(rel.person1);
 				if (band == null) {
 					band = new LinkedHashSet<>();
-					bands.put(owner, band);
 				}
-				
+						
 				band.add(rel.person1);
 				band.add(rel.person2);
-				members2owner.put(rel.person1, owner);
-				members2owner.put(rel.person2, owner);
+				
+				members2band.put(rel.person1, band);
+				members2band.put(rel.person2, band);
 	
 			}
 		);
 		
-		return bands.values().stream().collect(Collectors.toList());
+		Set<Set<Integer>> ret = new LinkedHashSet<>();
+		for (Set<Integer> b : members2band.values()) {
+			ret.add(b);
+		}
+		
+		return ret.stream().collect(Collectors.toList());
+		
 	}
 	
 	@Override
