@@ -27,13 +27,13 @@ public class BandSearchImpl implements BandSearch {
 		Map<Integer, Integer> members2owner = new HashMap<>();
 		Map<Integer, Set<Integer>> bands = new LinkedHashMap<>();  
 		
-		normalizedRelations.forEach(rel ->
+		normalizedRelations
+			.filter(rel -> rel.person1 != rel.person2)
+			.forEach(rel ->
 		{
 		
-		// for (Relation rel : normalizedRelations) {
 			final int p1 = rel.person1;
 			final int p2 = rel.person2;
-			if (p1 != p2) {
 
 			Integer owner = members2owner.get(p1);
 			if (owner == null) {
@@ -52,7 +52,6 @@ public class BandSearchImpl implements BandSearch {
 			
 			band.add(p2);
 			members2owner.put(p2, owner);
-			}
 
 		}
 		);
