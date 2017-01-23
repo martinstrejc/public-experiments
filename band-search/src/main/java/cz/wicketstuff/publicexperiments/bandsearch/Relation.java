@@ -53,6 +53,5 @@ public class Relation implements Serializable, Comparable<Relation> {
 		int c1 = person1 - o.person1; 
 		return c1 == 0 ? person2 - o.person2 : c1;
 	}
-
-	
+		
 }

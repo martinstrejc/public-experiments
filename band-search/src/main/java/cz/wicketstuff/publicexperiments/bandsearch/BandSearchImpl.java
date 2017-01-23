@@ -51,12 +51,9 @@ public class BandSearchImpl implements BandSearch {
 			band.add(p2);
 			members2owner.put(p2, owner);
 
-
 		}
 		
-		final List<Set<Integer>> ret = new ArrayList<>(bands.size());
-		bands.values().forEach(ret::add);
-		return ret;
+		return bands.values().stream().collect(Collectors.toList());
 	}
 	
 	@Override
