@@ -43,18 +43,18 @@ public class BandSearchImpl implements BandSearch {
 			}
 		);
 		
-		Set<Set<Integer>> ret = new LinkedHashSet<>();
-		for (Set<Integer> b : members2band.values()) {
-			ret.add(b);
-		}
-		
-		return ret.stream().collect(Collectors.toList());
-		
+		return members2band
+				.values()
+				.stream()
+				.collect(LinkedHashSet::new, LinkedHashSet::add, LinkedHashSet::addAll);		
 	}
 	
 	@Override
 	public Collection<Integer> findBandsSize(Collection<Relation> relations) {
-		return findBands(relations).stream().map(Set::size).collect(Collectors.toList());
+		return findBands(relations)
+				.stream()
+				.map(Set::size)
+				.collect(Collectors.toList());
 	}
 
 }
