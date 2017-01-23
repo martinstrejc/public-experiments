@@ -33,6 +33,10 @@ public class BandSearchImpl implements BandSearch {
 			if (p1 == p2) {
 				continue;
 			}
+			/*
+			saveData(p1, p1, members2owner, bands);
+			saveData(p1, p2, members2owner, bands);
+*/
 			Integer owner = members2owner.get(p1);
 			if (owner == null) {
 				owner = p1;
@@ -57,19 +61,7 @@ public class BandSearchImpl implements BandSearch {
 			}
 
 			
-			owner = members2owner.get(p1);
-			if (owner == null) {
-				owner = p1;
-				members2owner.put(p2, owner);
-				Set<Integer> band = bands.get(owner);
-				if (band == null) {
-					band = new LinkedHashSet<>();
-					band.add(p2);
-					bands.put(owner, band);
-				} else {
-					band.add(p2);
-				}
-			} else {
+			// owner = members2owner.get(p1);
 				Set<Integer> band = bands.get(owner);
 				if (band == null) {
 					band = new LinkedHashSet<>();
@@ -78,7 +70,6 @@ public class BandSearchImpl implements BandSearch {
 				} else {
 					band.add(p2);
 				}				
-			}
 			members2owner.put(p2, owner);
 
 
@@ -87,6 +78,31 @@ public class BandSearchImpl implements BandSearch {
 		final List<Set<Integer>> ret = new LinkedList<>();
 		bands.values().forEach(ret::add);
 		return ret;
+	}
+	
+	private static void saveData(int ownerSearch, int person, Map<Integer, Integer> members2owner, Map<Integer, Set<Integer>> bands) {
+		Integer owner = members2owner.get(ownerSearch);
+		if (owner == null) {
+			owner = ownerSearch;
+			members2owner.put(person, owner);
+			Set<Integer> band = bands.get(owner);
+			if (band == null) {
+				band = new LinkedHashSet<>();
+				band.add(person);
+				bands.put(owner, band);
+			} else {
+				band.add(person);
+			}
+		} else {
+			Set<Integer> band = bands.get(owner);
+			if (band == null) {
+				band = new LinkedHashSet<>();
+				band.add(person);
+				bands.put(owner, band);
+			} else {
+				band.add(person);
+			}				
+		}
 	}
 
 	@Override
