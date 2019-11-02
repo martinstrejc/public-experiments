@@ -59,7 +59,7 @@ public class App
 	
 	public void killThreads() throws IOException
 	{
-		for (int i = 0; i < 100; i++)
+		for (int i = 0; i < 20; i++)
 		{
 			threadSockes.pollLast().interrupt();
 		}
@@ -82,7 +82,19 @@ public class App
 	    		Runtime rt = Runtime.getRuntime();
 	    		logMessage("Totl memory " + rt.totalMemory());
 	    		logMessage("Free memory " + rt.freeMemory());
-            	killThreads();
+            	
+	    		try
+	    		{
+	            	logMessage("Going to sleep");
+	    			Thread.sleep(30000);
+	    		}
+	    		catch (InterruptedException ie)
+	    		{
+	            	logMessage("InterruptedException");
+	    			Thread.currentThread().interrupt();
+	    		}
+	    		
+	    		killThreads();
             	socketProcess.close();
 				// e.printStackTrace();
 				break;
